@@ -1,0 +1,33 @@
+node_modules
+bower_components
+.DS_Store
+.idea
+bundle.*
+npm-debug.log
+debug.log
+build
+main.js
+.tmp
+.sass-cache
+.nyc_output/
+dist/
+coverage/
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+__MACOSX/
+
+
+# IDE's generated files #
+#########################
+/.idea
+### VisualStudioCode ###
+/.vscode
+.vscode/*
