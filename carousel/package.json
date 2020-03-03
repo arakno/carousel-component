@@ -9,8 +9,12 @@
     "a11y": "pa11y --config pa11y.config.json http://localhost:8080",
     "prepare": "snowpack --include './js/index.js'",
     "start": "servor --reload",
-    "test": "tape \"test/**/*.spec.js\" | colortape",
-    "prepush": "npm run prettier && npm run lint && npm run a11y"
+    "test": "karma start --coverage",
+    "prepush": "npm run prettier && npm run lint && npm run a11y",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:update-snapshots": "karma start --update-snapshots",
+    "test:prune-snapshots": "karma start --prune-snapshots",
+    "test:bs": "karma start karma.bs.config.js --coverage"
   },
   "husky": {
     "hooks": {
@@ -40,7 +44,6 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "browser-env": "^3.3.0",
-    "colortape": "^0.1.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
@@ -52,7 +55,10 @@
     "prettier": "^1.19.1",
     "servor": "^3.2.0",
     "snowpack": "^1.5.1",
-    "tape": "^4.13.2"
+    "@open-wc/testing-karma": "^3.0.0",
+    "deepmerge": "^3.2.0",
+    "@open-wc/testing-karma-bs": "^1.0.0",
+    "@open-wc/testing": "^2.0.0"
   },
   "prettier": {
     "tabWidth": 2,

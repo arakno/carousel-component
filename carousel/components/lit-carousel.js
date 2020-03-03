@@ -4115,6 +4115,7 @@ export class LitCarousel extends LitElement {
         <p>Click, mousewheel or use your keyboard cursor keys</p>
         <nav class="carousel-nav">
           <lit-slide></lit-slide>
+          <slot name="slides"></slot>
           <div id="movies"></div>
           <button class="carousel-btn__prev">&#9668; LEFT</button>
           <button class="carousel-btn__next">RIGHT &#9658;</button>
@@ -4123,3 +4124,6 @@ export class LitCarousel extends LitElement {
     `
   }
 }
+
+
+customElements.define('lit-carousel', LitCarousel);
