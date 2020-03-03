@@ -1,4 +1,6 @@
+// import { LitSlide } from './lit-slide.js'
 import { LitElement, html, css } from '../web_modules/lit-element.js'
+import './lit-slide.js'
 
 export class LitCarousel extends LitElement {
   static get properties() {
@@ -10,48 +12,168 @@ export class LitCarousel extends LitElement {
   constructor() {
     super()
     this.title = ''
-    // attach a shadow allowing for accessibility from outside
-    // this.attachShadow({mode: 'open'});
   }
 
   static get styles() {
     return css`
-      ul {
-        min-height: 100px;
-        padding: 0;
-        list-style: none;
-        text-align: left;
-        border: 4px dashed #aaa;
+    #wrapper {
+      min-height: 100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+    nav {
+      margin: 10px;
+      width: 100%;
+      height: 50px;
+      cursor: pointer;
+    }
+    nav #carroussel {
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+    }
+    nav #carroussel .movie {
+      margin: 0 0.3em;
+      background: #d1533a;
+      padding: 10px;
+      display: inline-block;
+      list-style: none;
+      -webkit-border-top-right-radius: 4px;
+      -webkit-border-bottom-right-radius: 0;
+      -webkit-border-bottom-left-radius: 0;
+      -webkit-border-top-left-radius: 0;
+      -moz-border-radius-topright: 4px;
+      -moz-border-radius-bottomright: 0;
+      -moz-border-radius-bottomleft: 0;
+      -moz-border-radius-topleft: 0;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      -webkit-background-clip: padding-box;
+      -moz-background-clip: padding;
+      background-clip: padding-box;
+    }
+    nav #carroussel .movie + .moveR + li:last-child,
+    nav #carroussel .movie + .moveR + li:nth-child(4) {
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-name: fadeOut;
+      -moz-animation-name: fadeOut;
+      -o-animation-name: fadeOut;
+      animation-name: fadeOut;
+    }
+    nav #carroussel .movie.moveL:first-child,
+    nav #carroussel .movie.moveL:nth-child(2) {
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      -o-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      -moz-animation-fill-mode: both;
+      -o-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-name: fadeOut;
+      -moz-animation-name: fadeOut;
+      -o-animation-name: fadeOut;
+      animation-name: fadeOut;
+    }
+    nav #carroussel .movie p {
+      font-weight: bold;
+    }
+    nav button {
+      clear: both;
+      *zoom: 1;
+      display: inline-block;
+      outline: none;
+      padding: 0.7em 1.5em;
+      margin-top: 2em;
+      border-radius: 0.4em;
+      background: #68eecc;
+      text-shadow: 0 0.08em 0.08em #000;
+      border-width: 0.08em;
+      border-style: solid;
+      border-color: #4e7166 #4e7166 #39534b;
+      border-bottom-width: 0.2em;
+      box-shadow: inset 0.08em 0.08em 0.14em rgba(255, 255, 255, 0.5),
+        0.08em 0.14em 0.2em rgba(0, 0, 0, 0.3);
+    }
+    nav button:before,
+    nav button:after {
+      content: '\0020';
+      display: table;
+    }
+    nav button:after {
+      clear: both;
+    }
+    nav button:hover {
+      background: #96f3db;
+    }
+    .moveR {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -webkit-transform: translate(210px, 0);
+      -moz-transform: translate(210px, 0);
+      -ms-transform: translate(210px, 0);
+      -o-transform: translate(210px, 0);
+      transform: translate(210px, 0);
+    }
+    .moveL {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -webkit-transform: translate(-210px, 0);
+      -moz-transform: translate(-210px, 0);
+      -ms-transform: translate(-210px, 0);
+      -o-transform: translate(-210px, 0);
+      transform: translate(-210px, 0);
+    }
+    @media only screen and (min-width: 320px) {
+      body {
+        font-size: 12px;
+        font-size: 1.2rem;
       }
-
-      li {
-        padding: 5px 10px;
+      nav {
+        display: inline;
       }
-
-      li:nth-child(odd) {
-        box-shadow: 0 0 1px -1px rgba(0, 0, 0, 0.5);
-        background: #f8fbff;
+    }
+    @media only screen and (min-width: 640px) {
+      body {
+        font-size: 16px;
+        font-size: 1.6rem;
       }
-
-      button {
-        font-size: 24px;
-        padding: 10px;
+      #wrapper > header {
+        height: 200px;
       }
+      nav ul .movie {
+        display: inline-block;
+      }
+      #cntent {
+        margin-top: 20px;
+      }
+    }
+    
     `
   }
 
+  // Render template without shadow DOM
   // createRenderRoot() {
-  //   /**
-  //    * Render template without shadow DOM. Note that shadow DOM features like
-  //    * encapsulated CSS and slots are unavailable.
-  //    */
   //   return this;
   // }
 
   connectedCallback() {
     super.connectedCallback() // All inherited lifecycle methods need to call super.
-
-    console.log('TA LIGADO VEI!')
 
     const self = this
 
@@ -303,8 +425,14 @@ export class LitCarousel extends LitElement {
       .catch(err => console.error(err))
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    // this._input.removeEventListener('wheelEvt', this.handleWheel)
+  }
+  
   render() {
     return html`
+      <lit-slide></lit-slide>
       <div id="content">
         <h2>${this.title}</h2>
         <p>Click, mousewheel or use your keyboard cursor keys</p>
