@@ -1,0 +1,17 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "page": {
+      "viewport": {
+        "width": 320,
+        "height": 480
+      }
+    }
+  },
+  "ignore": [
+    "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail",
+    "WCAG2AA.Principle4.Guideline4_1.4_1_2.H91.A.NoContent",
+    "WCAG2AA.Principle4.Guideline4_1.4_1_1.F77"
+  ],
+  "urls": "http://localhost:8080"
+}

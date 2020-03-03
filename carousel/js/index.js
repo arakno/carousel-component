@@ -1,3 +1,3 @@
-import { LitSnowpack } from '../components/lit-snowpack.js'
+import { LitCarousel } from '../components/lit-carousel.js'
 
-window.customElements.define('lit-snowpack', LitSnowpack)
+window.customElements.define('lit-carousel', LitCarousel)

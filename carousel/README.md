@@ -1,17 +1,29 @@
-# 🖥️ create-pika-app
+# Component Exercise
+
+This exercise makes use of snowpack for better development experience and less overhead on the artifacts.
 
 #### 🎉 `Snowpack` + `lit-element` + `lit-html` Example Project
 
-<img width="500px" src="https://imgur.com/FpyU0Eg.png" align="right"></img>
-
 ## 🚀 Getting Started
 
-```bash
+```
 npm install
 npm start
 ```
 
-Your app will be available at `localhost:5000`
+To run tests:
+
+```
+npm test
+```
+
+Your app will be available at `localhost:8080`
+
+## Rationale
+
+Web components provide us with encapsulation and separation of concerns out of the box.
+I have used no frameworks but chosen to include LitElement (and LitHtml) for improved developer experience and readability.
+They also provide a baseline polyfill for browsers with poor support for custom elements.
 
 ## A note on directives
 
@@ -28,9 +40,8 @@ If you want to use directives, you'll have to add them to the `webDependencies` 
   },
 ```
 
-### 🙏 Special Thanks
+### 🙏 Please refer to
 
-[@pika/web](https://github.com/pikapkg/web)  
 [lit-html](https://github.com/polymer/lit-html)
 [lit-element](https://github.com/polymer/lit-element)
 [create-pika-app](https://github.com/ndom91/create-pika-app)
