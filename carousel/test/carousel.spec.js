@@ -1,7 +1,7 @@
 const test = require('tape').test;
 // const setup = require('./setup.js')
 // setup()
-
+// const { LitElement, html, css } = require('lit-element')
 // const Carousel = require('../components/lit-carousel')
 
 test('counter increments', t => {
