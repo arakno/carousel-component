@@ -44,7 +44,7 @@ If you want to use directives, you'll have to add them to the `webDependencies` 
 
 [lit-html](https://github.com/polymer/lit-html)
 [lit-element](https://github.com/polymer/lit-element)
-[create-pika-app](https://github.com/ndom91/create-pika-app)
+[D3](https://github.com/d3/d3)
 
 ---
 
