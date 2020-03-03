@@ -1,15 +1,17 @@
 {
   "name": "carousel",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "carousel component exercise",
+  "main": "js/index.js",
   "scripts": {
+    "prettier": "prettier --write **/*.{js,ts,tsx,json,css,scss,md,yml}",
+    "lint": "eslint -c ./.eslintrc.js --ext .js,.jsx components/*",
     "prepare": "snowpack --include './js/index.js'",
     "start": "serve ./",
-    "test": "tap \"test/**/*.spec.js\" --cov"
+    "test": "npm run prettier && npm run lint && tape \"test/**/*.spec.js\""
   },
   "keywords": [],
-  "author": "",
+  "author": "@arakno",
   "license": "ISC",
   "snowpack": {
     "webDependencies": [
@@ -27,7 +29,31 @@
     "lit-html": "^1.1.2"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1",
     "serve": "^11.3.0",
-    "snowpack": "^1.5.1"
+    "snowpack": "^1.5.1",
+    "tape": "^4.13.2"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false
+  },
+  "lint-staged": {
+    "./src/*.js": [
+      "eslint -c ./.eslintrc.js --fix ./components/*"
+    ],
+    "**/*.{js,ts,tsx,json,css,scss,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

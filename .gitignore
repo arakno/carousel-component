@@ -1,7 +1,5 @@
 node_modules
 bower_components
-.DS_Store
-.idea
 bundle.*
 npm-debug.log
 debug.log
