@@ -2,7 +2,7 @@
 
 This exercise makes use of snowpack for better development experience and less overhead on the artifacts.
 
-#### 🎉 `Snowpack` + `lit-element` + `lit-html` Example Project
+#### 🎉 `Snowpack` + `lit-element` + `lit-html`
 
 ## 🚀 Getting Started
 
@@ -10,6 +10,8 @@ This exercise makes use of snowpack for better development experience and less o
 npm install
 npm start
 ```
+Your app will be available at `localhost:8080`
+
 
 To run tests:
 
@@ -17,7 +19,6 @@ To run tests:
 npm test
 ```
 
-Your app will be available at `localhost:8080`
 
 ## Rationale
 
