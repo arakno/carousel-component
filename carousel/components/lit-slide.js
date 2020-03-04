@@ -21,13 +21,6 @@ export class LitSlide extends LitElement {
         padding: 10px;
 				border-bottom: 1px solid #ccc;
 			}
-			
-			.label {
-				font-size: 1.6rem;
-			}
-			.label-main {
-				fill: #717171;
-			}
 
     `
 	}
@@ -60,7 +53,12 @@ export class LitSlide extends LitElement {
 		
 		labels.append('text')
 			.attr('text-anchor', 'middle')
-			.text(this.dataset.title)
+			.text(title)
+			.style({'fill': 'red', 'font-size': '18px'})
+		labels.append('text')
+			.attr('text-anchor', 'middle')
+			.attr('transform', `translate(${0}, ${20})`)
+			.text(value)
 			.style({'fill': 'red', 'font-size': '18px'})
 		// set wedge groups
 		const arcs = svg.selectAll('g.arc')
@@ -73,11 +71,6 @@ export class LitSlide extends LitElement {
 		arcs.append('path')
 			.attr('fill', (d, i) => colors[i])
 			.attr('d', arc)
-
-
-
-
-
 	}
 
 	render() {
