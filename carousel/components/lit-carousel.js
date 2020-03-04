@@ -6,25 +6,14 @@ export class LitCarousel extends LitElement {
   static get properties() {
     return {
       title: { type: String },
+      response: { type: Array }
     }
   }
 
   constructor() {
     super()
     this.title = ''
-    this.response = [{
-      title: 'Revenue',
-      value: '200.000',
-      data: [70, 30]
-    }, {
-      title: 'Impressions',
-      value: '50.000.000',
-      data: [60, 40]
-    }, {
-      title: 'Visits',
-      value: '600.000.000',
-      data: [90, 10]
-    }]
+    this.response = []
   }
 
   static get styles() {
@@ -3879,9 +3868,9 @@ export class LitCarousel extends LitElement {
         .then(response => {
           return response.json()
         })
-        .then(data => {
-          console.log(data)
-          // this.response = data
+        .then(res => {
+          console.log(res.stats)
+          this.response = res.stats
           // slides.init(data)
         })
         .catch(err => console.error(err))
@@ -4130,13 +4119,14 @@ export class LitCarousel extends LitElement {
   
 
   render() {
+    const { response } = this
     return html`
       <div class="carousel-content wrapper">
         <h2>${this.title}</h2>        
         <p class="visually-hidden">Click, mousewheel or use your keyboard cursor keys</p>
         <nav class="carousel-nav">
-        ${this.response
-          ? html`${this.response.map(i => html`<lit-slide .dataset=${i}></lit-slide>`)}`
+        ${response
+          ? html`${response.map(i => html`<lit-slide .dataset=${i}></lit-slide>`)}`
           : '<p>No slides were added!</p>'}
           <slot name="slide"></slot>
           <div id="movies"></div>

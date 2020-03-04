@@ -5,7 +5,7 @@ export class LitSlide extends LitElement {
 	static get properties() {
 		return {
 			dataset: {
-				type: Array
+				type: Object
 			},
 		}
 	}
@@ -26,6 +26,8 @@ export class LitSlide extends LitElement {
 
 	draw() {
 
+		const self = this
+		
 		const pie = d3.pie(this.dataset.data)
 
 		const w = 300
