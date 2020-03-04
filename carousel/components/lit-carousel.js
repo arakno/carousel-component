@@ -1,5 +1,7 @@
-// import { LitSlide } from './lit-slide.js'
 import { LitElement, html, css } from '../web_modules/lit-element.js'
+import * as d3 from 'https://unpkg.com/d3?module'
+// var d3 = Object.assign({}, require("d3-format"), require("d3-geo"), require("d3-geo-projection"));
+
 import './lit-slide.js'
 
 export class LitCarousel extends LitElement {
@@ -12,6 +14,7 @@ export class LitCarousel extends LitElement {
   constructor() {
     super()
     this.title = ''
+    this.response = [[5, 20, 40, 15, 20], [40, 20, 40], [60, 20, 20]]
   }
 
   static get styles() {
@@ -3850,10 +3853,26 @@ export class LitCarousel extends LitElement {
   //   return this;
   // }
 
+  getData() {
+ 
+      fetch('../data.json')
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          console.log(data)
+          // this.response = data
+          // slides.init(data)
+        })
+        .catch(err => console.error(err))
+  }
+
   connectedCallback() {
-    super.connectedCallback() // All inherited lifecycle methods need to call super.
+    super.connectedCallback()
 
     const self = this
+
+    this.getData();
 
     document.addEventListener('DOMContentLoaded', function() {
       /**
@@ -4080,26 +4099,6 @@ export class LitCarousel extends LitElement {
         })
       }
 
-      /**
-       * @description: Get data
-       * @return: {Promise}
-       */
-      const url = '../data.json'
-      const options = {
-        method: 'GET'
-      }
-
-      fetch(url, options)
-        .then(response => {
-          return response.json()
-        })
-        .then(data => {
-          console.log(data)
-          slides.init(data)
-        })
-        .catch(err => console.error(err))
-
-
     }, false);
 
   }
@@ -4113,9 +4112,10 @@ export class LitCarousel extends LitElement {
     return html`
       <div class="carousel-content wrapper">
         <h2>${this.title}</h2>
+        <lit-slide .dataset=${this.dataset[0]}></lit-slide>
         <p>Click, mousewheel or use your keyboard cursor keys</p>
         <nav class="carousel-nav">
-          <lit-slide></lit-slide>
+          <slot name="slide"></slot>
           <div id="movies"></div>
           <button class="carousel-btn__prev">&#9668; LEFT</button>
           <button class="carousel-btn__next">RIGHT &#9658;</button>
