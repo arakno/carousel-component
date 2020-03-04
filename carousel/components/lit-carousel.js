@@ -3813,6 +3813,11 @@ export class LitCarousel extends LitElement {
       -o-transform: translate(-210px, 0);
       transform: translate(-210px, 0);
     }
+
+    ul#carroussel {
+      display: inline-flex;
+    }
+
     @media only screen and (min-width: 320px) {
       body {
         font-size: 12px;
@@ -3913,30 +3918,29 @@ export class LitCarousel extends LitElement {
         }
       }
 
-      const app = {}
+      const slides = {}
 
-      var isTweening = false
+      let isTweening = false
 
-      var intervalo = 120
-      var numItems
-      var centroX = document.body.clientWidth / 2
-      var centroY = document.body.clientHeight / 2
-      var objindex
-      var objData = {}
-      var objPos = []
-      var objName = []
-      var objOrder = []
+      const margin = 120
+      let numItems
+      let centroX = document.body.clientWidth / 2
+      let centroY = document.body.clientHeight / 2
+      let objindex
+      const objData = {}
+      const objPos = []
+      const objName = []
+      const objOrder = []
 
-      var centroH
+      var horizontalCenter
 
       /** create main container */
-      const home = document.createElement('ul')
-      // var home = self.shadowRoot.createElement('ul')
-      home.id = 'carroussel'
-      $('#movies').appendChild(home)
+      const ul = document.createElement('ul')
+      // var ul = self.shadowRoot.createElement('ul')
+      ul.id = 'carroussel'
+      $('#movies').appendChild(ul)
 
-      app.init = function(resp) {
-        debugger
+      slides.init = function(resp) {
         var recommended = resp.data[0].assets
         var promoted = resp.data[1].assets
 
@@ -3972,7 +3976,7 @@ export class LitCarousel extends LitElement {
           img.setAttribute('alt', movies[i].title)
           movie.appendChild(img)
           movie.appendChild(p)
-          $('#' + home.id).appendChild(movie)
+          $('#' + ul.id).appendChild(movie)
 
           var tw = movie.clientWidth
           var tpos = movie.offsetLeft
@@ -3982,14 +3986,14 @@ export class LitCarousel extends LitElement {
           objOrder[i] = tpos
 
           movie.on('click', function() {
-            app.move(movie)
+            slides.move(movie)
           })
         })
 
-        app.events()
+        slides.events()
       }
 
-      app.queueRight = function() {
+      slides.queueRight = function() {
         isTweening = true
         for (let mc in objData) {
           $('#' + mc).style.visibility = 'visible'
@@ -3998,16 +4002,16 @@ export class LitCarousel extends LitElement {
           $('#' + mc).classList.add('moveR')
         }
 
-        var first = $('#' + home.id).querySelector('li:first-child')
-        var last = $('#' + home.id).querySelector('li:last-child')
+        var first = $('#' + ul.id).querySelector('li:first-child')
+        var last = $('#' + ul.id).querySelector('li:last-child')
         var clone = last.cloneNode(true)
         last.parentNode.removeChild(last)
-        $('#' + home.id).insertBefore(clone, first)
+        $('#' + ul.id).insertBefore(clone, first)
 
         isTweening = false
       }
 
-      app.queueLeft = function() {
+      slides.queueLeft = function() {
         isTweening = true
         for (let mc in objData) {
           $('#' + mc).style.visibility = 'visible'
@@ -4016,8 +4020,8 @@ export class LitCarousel extends LitElement {
           $('#' + mc).classList.add('moveL')
         }
 
-        var first = $('#' + home.id).querySelector('li:first-child')
-        var last = $('#' + home.id).querySelector('li:last-child')
+        var first = $('#' + ul.id).querySelector('li:first-child')
+        var last = $('#' + ul.id).querySelector('li:last-child')
         var clone = first.cloneNode(true)
         first.parentNode.removeChild(first)
         last.insertAfter(clone, last)
@@ -4025,35 +4029,35 @@ export class LitCarousel extends LitElement {
         isTweening = false
       }
 
-      app.move = function(obj) {
-        if (obj.offsetLeft > centroH - intervalo) {
-          app.queueLeft(obj)
+      slides.move = function(obj) {
+        if (obj.offsetLeft > horizontalCenter - margin) {
+          slides.queueLeft(obj)
         } else {
-          app.queueRight(obj)
+          slides.queueRight(obj)
         }
       }
 
       /** @Events */
-      app.events = function() {
+      slides.events = function() {
         $('.btn__prev').on('click', function() {
           //console.log("objDATA: " + objData[item2]);
           if (!isTweening) {
-            app.queueLeft()
+            slides.queueLeft()
           }
         })
 
         $('.btn__next').on('click', function() {
           if (!isTweening) {
-            app.queueRight()
+            slides.queueRight()
           }
         })
 
         $('.wrapper').on('keydown', function(e) {
           if (e.keyCode == 39) {
-            app.queueRight()
+            slides.queueRight()
           }
           if (e.keyCode == 37) {
-            app.queueLeft()
+            slides.queueLeft()
           }
           e.preventDefault
         })
@@ -4065,12 +4069,12 @@ export class LitCarousel extends LitElement {
             ? 'mousewheel' // Webkit and IE
             : 'DOMMouseScroll' // remaining browsers
 
-        $('.wrapper').on(wheelEvt, function(e) {
+        $('.wrapper').on(wheelEvt, (e) => {
           if (!isTweening) {
             if (e.deltaY > 0) {
-              app.queueLeft()
+              slides.queueLeft()
             } else if (e.deltaY <= 0) {
-              app.queueRight()
+              slides.queueRight()
             }
           }
         })
@@ -4080,21 +4084,18 @@ export class LitCarousel extends LitElement {
        * @description: Get data
        * @return: {Promise}
        */
-      const url = 'http://lg-devtest.herokuapp.com/data.json'
+      const url = '../data.json'
       const options = {
-        method: 'GET',
-        headers: {
-          Authorization: 'Bearer u12A8f3Zg',
-        },
+        method: 'GET'
       }
 
-      fetch(url, options, 'GET')
+      fetch(url, options)
         .then(response => {
           return response.json()
         })
         .then(data => {
           console.log(data)
-          app.init(data)
+          slides.init(data)
         })
         .catch(err => console.error(err))
 
@@ -4110,12 +4111,11 @@ export class LitCarousel extends LitElement {
   
   render() {
     return html`
-      <div class="carousel-content">
+      <div class="carousel-content wrapper">
         <h2>${this.title}</h2>
         <p>Click, mousewheel or use your keyboard cursor keys</p>
         <nav class="carousel-nav">
           <lit-slide></lit-slide>
-          <slot name="slides"></slot>
           <div id="movies"></div>
           <button class="carousel-btn__prev">&#9668; LEFT</button>
           <button class="carousel-btn__next">RIGHT &#9658;</button>
@@ -4126,4 +4126,4 @@ export class LitCarousel extends LitElement {
 }
 
 
-customElements.define('lit-carousel', LitCarousel);
+// customElements.define('lit-carousel', LitCarousel);

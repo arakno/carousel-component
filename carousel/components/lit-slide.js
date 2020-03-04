@@ -3,10 +3,11 @@ import { LitElement, html, css } from '../web_modules/lit-element.js'
 export class LitSlide extends LitElement {
   static get styles() {
     return css`
-      footer {
+      header {
         padding: 10px;
         color: gray;
-        font-style: italic;
+				font-style: italic;
+				border: 1px solid #ccc
       }
     `
   }
