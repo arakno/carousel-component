@@ -20,42 +20,64 @@ export class LitSlide extends LitElement {
       header {
         padding: 10px;
 				border-bottom: 1px solid #ccc;
-      }
+			}
+			
+			.label {
+				font-size: 1.6rem;
+			}
+			.label-main {
+				fill: #717171;
+			}
+
     `
 	}
+
 
 	draw() {
 
 		const self = this
-		
-		const pie = d3.pie(this.dataset.data)
+		const data = this.dataset.data
+		const title = this.dataset.title
+		const value = this.dataset.value
+		const colors = this.dataset.colors
+
+		const pie = d3.pie(data)
 
 		const w = 300
 		const h = 300
 		const outerRadius = w / 2
 		const innerRadius = w / 2.3
 		const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius)
-		const color = d3.scaleOrdinal().range(['#0075B4', '#70B5DC']);
 
 		const svg = d3.select(self)
 			.append('svg')
 			.attr('width', w)
 			.attr('height', h)
+
+		const labels = svg.append("g")
+			.attr("class", "labels")
+			.attr('transform', `translate(${outerRadius}, ${outerRadius})`)
+		
+		labels.append('text')
+			.attr('text-anchor', 'middle')
+			.text(this.dataset.title)
+			.style({'fill': 'red', 'font-size': '18px'})
 		// set wedge groups
 		const arcs = svg.selectAll('g.arc')
-			.data(pie(this.dataset.data))
+			.data(pie(data))
 			.enter()
 			.append('g')
 			.attr('class', 'arc')
 			.attr('transform', `translate(${outerRadius}, ${outerRadius})`)
 		// draw arc paths
 		arcs.append('path')
-			.attr('fill', (d, i) => color(i))
+			.attr('fill', (d, i) => colors[i])
 			.attr('d', arc)
 
-		svg.append('text')
-			.attr('text-anchor', 'middle')
-			.text(this.dataset.title)
+
+
+
+
 	}
 
 	render() {
