@@ -2,93 +2,17 @@
   "id": "collections",
   "data": [
     {
-      "id": "recommended",
-      "title": "Recommended",
-      "assets": [
-        {
-          "id": "the_descendants",
-          "title": "The Descendants",
-          "genre": "Comedy",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_descendants.png"
-        },
-        {
-          "id": "quantum_of_solace",
-          "title": "Quantum of Solace",
-          "genre": "Action",
-          "imdb": 5.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_quantum_of_solace.png"
-        },
-        {
-          "id": "slumdog_millionaire",
-          "title": "Slumdog Millionaire",
-          "genre": "Drama",
-          "imdb": 7.2,
-          "img": "https://lg-devtest.herokuapp.com/images/box_slumdog_millionaire.png"
-        },
-        {
-          "id": "The_Kings_speech",
-          "title": "The King's speech",
-          "genre": "Biography",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_the_kings_speech.png"
-        },
-        {
-          "id": "Good_Night_and_Good_Luck",
-          "title": "Good Night, and Good Luck",
-          "genre": "Drama",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_good_night_and_good_luck.png"
-        },
-        {
-          "id": "Breaking_Bad",
-          "title": "Breaking Bad",
-          "genre": "Action",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_breaking_bad.png"
-        }
-      ]
-    },
-    {
-      "id": "promoted",
-      "title": "Promoted",
-      "assets": [
-        {
-          "id": "avatar",
-          "title": "Avatar",
-          "genre": "Action",
-          "imdb": 5.7,
-          "img": "https://lg-devtest.herokuapp.com/images/box_avatar.png"
-        },
-        {
-          "id": "crazy_stupid_love",
-          "title": "Crazy Stupid Love",
-          "genre": "Comedy",
-          "imdb": 4.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_crazy_stupid_love.png"
-        },
-        {
-          "id": "Brick_Mansions",
-          "title": "Brick Mansions",
-          "genre": "Action",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_brick_mansions.png"
-        },
-        {
-          "id": "gangs_of_new_york",
-          "title": "Gangs of New York",
-          "genre": "Action",
-          "imdb": 7.4,
-          "img": "https://lg-devtest.herokuapp.com/images/box_gangs_of_new_york.png"
-        },
-        {
-          "id": "argo",
-          "title": "Argo",
-          "genre": "Biography",
-          "imdb": 8.7,
-          "img": "https://lg-devtest.herokuapp.com/images/box_argo.png"
-        }
-      ]
+      "title": "Revenue",
+      "value": "200.000",
+      "data": [70, 30]
+    }, {
+      "title": "Impressions",
+      "value": 50.000.000,
+      "data": [60, 40]
+    }, {
+      "title": "Visits",
+      "value": 600.000.000,
+      "data": [90, 10]
     }
   ]
 }

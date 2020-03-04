@@ -14,7 +14,19 @@ export class LitCarousel extends LitElement {
   constructor() {
     super()
     this.title = ''
-    this.response = [[5, 20, 40, 15, 20], [40, 20, 40], [60, 20, 20]]
+    this.response = [{
+      title: 'Revenue',
+      value: '200.000',
+      data: [70, 30]
+    }, {
+      title: 'Impressions',
+      value: 50.000.000,
+      data: [60, 40]
+    }, {
+      title: 'Visits',
+      value: 600.000.000,
+      data: [90, 10]
+    }]
   }
 
   static get styles() {
