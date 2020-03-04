@@ -19,23 +19,25 @@ export class LitCarousel extends LitElement {
   static get styles() {
     return css`
 
-    .wrapper {
+    .carousel-wrapper {
       min-height: 100%;
       position: relative;
       overflow-x: hidden;
     }
-    .carousel-nav {
+    .carousel-slides {
+      display: flex;
       margin: 10px;
       width: 100%;
-      height: 50px;
+      height: auto;
       cursor: pointer;
+      border-left: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
     }
 
-    #carousel {
-      display: inline-flex;
-      text-align: center;
-      margin: 0 auto;
+    .carousel-nav {
+      display: flex;
     }
+
 
     @media only screen and (min-width: 320px) {
       body {
@@ -43,7 +45,7 @@ export class LitCarousel extends LitElement {
         font-size: 1.2rem;
       }
       .carousel-nav {
-        display: inline;
+        display: flex;
       }
     }
     @media only screen and (min-width: 640px) {
@@ -51,13 +53,7 @@ export class LitCarousel extends LitElement {
         font-size: 16px;
         font-size: 1.6rem;
       }
-      .wrapper > header {
-        height: 200px;
-      }
-      #carousel {
-        display: inline-block;
-      }
-      .carousel-content {
+      .carousel-wrapper {
         margin-top: 20px;
       }
     }
@@ -81,9 +77,7 @@ export class LitCarousel extends LitElement {
           return response.json()
         })
         .then(res => {
-          console.log(res.stats)
           this.response = res.stats
-          slides.init(response)
         })
         .catch(err => console.error(err))
   }
@@ -324,22 +318,21 @@ export class LitCarousel extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    // this._input.removeEventListener('wheelEvt', this.handleWheel)
   }
   
 
   render() {
     const { response } = this
     return html`
-      <div class="carousel-content wrapper">
+      <div class="carousel-wrapper">
         <h2>${this.title}</h2>        
         <p class="visually-hidden">Click, mousewheel or use your keyboard cursor keys</p>
+        <div class="carousel-slides">
+        ${response
+          ? html`${response.map(i => html`<lit-slide .dataset=${i}></lit-slide>`)}`
+          : '<p>No slides were added!</p>'}
+        </div>
         <nav class="carousel-nav">
-          <div id="slides">
-          ${response
-            ? html`${response.map(i => html`<lit-slide .dataset=${i}></lit-slide>`)}`
-            : '<p>No slides were added!</p>'}
-          </div>
           <button class="carousel-btn__prev">&#9668; LEFT</button>
           <button class="carousel-btn__next">RIGHT &#9658;</button>
         </nav>
