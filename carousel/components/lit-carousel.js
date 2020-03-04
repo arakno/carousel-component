@@ -1,6 +1,4 @@
 import { LitElement, html, css } from '../web_modules/lit-element.js'
-import * as d3 from 'https://unpkg.com/d3?module'
-// var d3 = Object.assign({}, require("d3-format"), require("d3-geo"), require("d3-geo-projection"));
 
 import './lit-slide.js'
 
@@ -20,11 +18,11 @@ export class LitCarousel extends LitElement {
       data: [70, 30]
     }, {
       title: 'Impressions',
-      value: 50.000.000,
+      value: '50.000.000',
       data: [60, 40]
     }, {
       title: 'Visits',
-      value: 600.000.000,
+      value: '600.000.000',
       data: [90, 10]
     }]
   }
