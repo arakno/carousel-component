@@ -10,8 +10,8 @@ This exercise makes use of snowpack for better development experience and less o
 npm install
 npm start
 ```
-Your app will be available at `localhost:8080`
 
+Your app will be available at `localhost:8080`
 
 To run tests:
 
@@ -19,13 +19,11 @@ To run tests:
 npm test
 ```
 
-
 ## Rationale
 
 Web components provide us with encapsulation and separation of concerns out of the box.
 I have used no frameworks but chosen to include LitElement (and LitHtml) for improved developer experience and readability.
 They also provide a baseline polyfill for browsers with poor support for custom elements.
-
 
 ### 🙏 Please refer to
 

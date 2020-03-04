@@ -1,4 +1,7 @@
-import { a as directive, g as isPrimitive } from '../../common/lit-html-9957b87e.js';
+import {
+  a as directive,
+  g as isPrimitive,
+} from '../../common/lit-html-9957b87e.js'
 
 /**
  * @license
@@ -13,9 +16,9 @@ import { a as directive, g as isPrimitive } from '../../common/lit-html-9957b87e
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-const _state = new WeakMap();
+const _state = new WeakMap()
 // Effectively infinity, but a SMI.
-const _infinity = 0x7fffffff;
+const _infinity = 0x7fffffff
 /**
  * Renders one of a series of values, including Promises, to a Part.
  *
@@ -35,53 +38,52 @@ const _infinity = 0x7fffffff;
  *     const content = fetch('./content.txt').then(r => r.text());
  *     html`${until(content, html`<span>Loading...</span>`)}`
  */
-const until = directive((...args) => (part) => {
-    let state = _state.get(part);
-    if (state === undefined) {
-        state = {
-            lastRenderedIndex: _infinity,
-            values: [],
-        };
-        _state.set(part, state);
+const until = directive((...args) => part => {
+  let state = _state.get(part)
+  if (state === undefined) {
+    state = {
+      lastRenderedIndex: _infinity,
+      values: [],
     }
-    const previousValues = state.values;
-    let previousLength = previousValues.length;
-    state.values = args;
-    for (let i = 0; i < args.length; i++) {
-        // If we've rendered a higher-priority value already, stop.
-        if (i > state.lastRenderedIndex) {
-            break;
-        }
-        const value = args[i];
-        // Render non-Promise values immediately
-        if (isPrimitive(value) ||
-            typeof value.then !== 'function') {
-            part.setValue(value);
-            state.lastRenderedIndex = i;
-            // Since a lower-priority value will never overwrite a higher-priority
-            // synchronous value, we can stop processsing now.
-            break;
-        }
-        // If this is a Promise we've already handled, skip it.
-        if (i < previousLength && value === previousValues[i]) {
-            continue;
-        }
-        // We have a Promise that we haven't seen before, so priorities may have
-        // changed. Forget what we rendered before.
-        state.lastRenderedIndex = _infinity;
-        previousLength = 0;
-        Promise.resolve(value).then((resolvedValue) => {
-            const index = state.values.indexOf(value);
-            // If state.values doesn't contain the value, we've re-rendered without
-            // the value, so don't render it. Then, only render if the value is
-            // higher-priority than what's already been rendered.
-            if (index > -1 && index < state.lastRenderedIndex) {
-                state.lastRenderedIndex = index;
-                part.setValue(resolvedValue);
-                part.commit();
-            }
-        });
+    _state.set(part, state)
+  }
+  const previousValues = state.values
+  let previousLength = previousValues.length
+  state.values = args
+  for (let i = 0; i < args.length; i++) {
+    // If we've rendered a higher-priority value already, stop.
+    if (i > state.lastRenderedIndex) {
+      break
     }
-});
+    const value = args[i]
+    // Render non-Promise values immediately
+    if (isPrimitive(value) || typeof value.then !== 'function') {
+      part.setValue(value)
+      state.lastRenderedIndex = i
+      // Since a lower-priority value will never overwrite a higher-priority
+      // synchronous value, we can stop processsing now.
+      break
+    }
+    // If this is a Promise we've already handled, skip it.
+    if (i < previousLength && value === previousValues[i]) {
+      continue
+    }
+    // We have a Promise that we haven't seen before, so priorities may have
+    // changed. Forget what we rendered before.
+    state.lastRenderedIndex = _infinity
+    previousLength = 0
+    Promise.resolve(value).then(resolvedValue => {
+      const index = state.values.indexOf(value)
+      // If state.values doesn't contain the value, we've re-rendered without
+      // the value, so don't render it. Then, only render if the value is
+      // higher-priority than what's already been rendered.
+      if (index > -1 && index < state.lastRenderedIndex) {
+        state.lastRenderedIndex = index
+        part.setValue(resolvedValue)
+        part.commit()
+      }
+    })
+  }
+})
 
-export { until };
+export { until }
