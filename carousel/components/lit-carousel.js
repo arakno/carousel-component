@@ -3845,6 +3845,16 @@ export class LitCarousel extends LitElement {
         margin-top: 20px;
       }
     }
+
+
+    .visually-hidden { 
+      position: absolute !important;
+      height: 1px; 
+      width: 1px;
+      overflow: hidden;
+      clip: rect(1px, 1px, 1px, 1px);
+      white-space: nowrap;
+  }
     `
   }
 
@@ -4108,13 +4118,16 @@ export class LitCarousel extends LitElement {
     // this._input.removeEventListener('wheelEvt', this.handleWheel)
   }
   
+
   render() {
     return html`
       <div class="carousel-content wrapper">
-        <h2>${this.title}</h2>
-        <lit-slide .dataset=${this.dataset[0]}></lit-slide>
-        <p>Click, mousewheel or use your keyboard cursor keys</p>
+        <h2>${this.title}</h2>        
+        <p class="visually-hidden">Click, mousewheel or use your keyboard cursor keys</p>
         <nav class="carousel-nav">
+        ${this.response
+          ? html`${this.response.map(i => html`<lit-slide .dataset=${i}></lit-slide>`)}`
+          : '<p>No slides were added!</p>'}
           <slot name="slide"></slot>
           <div id="movies"></div>
           <button class="carousel-btn__prev">&#9668; LEFT</button>
