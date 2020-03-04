@@ -26,20 +26,6 @@ Web components provide us with encapsulation and separation of concerns out of t
 I have used no frameworks but chosen to include LitElement (and LitHtml) for improved developer experience and readability.
 They also provide a baseline polyfill for browsers with poor support for custom elements.
 
-## A note on directives
-
-If you want to use directives, you'll have to add them to the `webDependencies` property in your `package.json`:
-
-```json
-  "snowpack": {
-    "webDependencies": [
-        "lit-html",
-        "lit-element",
-        "lit-html/directives/until.js",
-        "lit-html/directives/class-map.js"
-    ],
-  },
-```
 
 ### 🙏 Please refer to
 
